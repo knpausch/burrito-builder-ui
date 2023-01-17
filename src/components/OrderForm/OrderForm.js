@@ -22,7 +22,10 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // this.setState({name:})
+
+    if(this.state.name && this.state.ingredients.length){
+      console.log("you good bro")
+    }
     // this.clearInputs();
   }
 
