@@ -19,20 +19,17 @@ class OrderForm extends Component {
     this.setState({ ingredients: [...this.state.ingredients, newIngredient] })
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
     if (this.state.name && this.state.ingredients.length) {
       const newOrder = { name: this.state.name, ingredients: this.state.ingredients }
       fetch('http://localhost:3001/api/v1/orders', {
         method: 'POST',
-        body: JSON.stringify({name: newOrder.name, ingredients: newOrder.ingredients}),
+        body: JSON.stringify({ name: newOrder.name, ingredients: newOrder.ingredients }),
         headers: { 'content-type': 'application/json' }
       })
         .then(response => response.json())
-        .then(data => {
-          this.props.addOrder(data)
-          return
-        })
+        .then(data => this.props.addOrder(data))
     }
     this.clearInputs();
   }
