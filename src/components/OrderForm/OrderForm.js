@@ -17,16 +17,28 @@ class OrderForm extends Component {
   handleIngredientChange = event => {
     event.preventDefault();
     const newIngredient = event.target.name
-    this.setState({ingredients: [...this.state.ingredients, newIngredient]})
+    this.setState({ ingredients: [...this.state.ingredients, newIngredient] })
   }
 
   handleSubmit = e => {
     e.preventDefault();
 
-    if(this.state.name && this.state.ingredients.length){
+    if (this.state.name && this.state.ingredients.length) {
       console.log("you good bro")
+
+      const newOrder = { name: this.state.name, ingredients: this.state.ingredients }
+      console.log("yo order before POST: ", newOrder)
+
+      fetch('http://localhost:3001/api/v1/orders', {
+        method: 'POST',
+        body: JSON.stringify({name: newOrder.name, ingredients: newOrder.ingredients}),
+        headers: { 'content-type': 'application/json' }
+      })
+        .then(response => response.json())
+        .then(data => console.log("DATA AFTER POST: ", data))
+
     }
-    // this.clearInputs();
+    this.clearInputs();
   }
 
   clearInputs = () => {
