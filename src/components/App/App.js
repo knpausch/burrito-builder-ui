@@ -5,8 +5,8 @@ import Orders from '../../components/Orders/Orders';
 import OrderForm from '../../components/OrderForm/OrderForm';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       orders: []
     }
@@ -22,12 +22,16 @@ class App extends Component {
       .catch(err => console.error('Error fetching:', err));
   }
 
+  addOrder = (newOrder) => {
+    this.setState({ orders: [...this.state.orders, newOrder] })
+  }
+
   render() {
     return (
       <main className="App">
         <header>
           <h1>Burrito Builder</h1>
-          <OrderForm />
+          <OrderForm addOrder={this.addOrder}/>
         </header>
         <Orders orders={this.state.orders} />
       </main>
