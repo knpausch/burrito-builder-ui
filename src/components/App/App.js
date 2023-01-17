@@ -16,7 +16,7 @@ class App extends Component {
     getOrders()
       .then(data => {
         this.setState({ orders: data.orders })
-        console.log("DATA: ", data)
+        console.log("DATA: ", data.orders)
         return
       })
       .catch(err => console.error('Error fetching:', err));
@@ -29,7 +29,6 @@ class App extends Component {
           <h1>Burrito Builder</h1>
           <OrderForm />
         </header>
-
         <Orders orders={this.state.orders} />
       </main>
     );
